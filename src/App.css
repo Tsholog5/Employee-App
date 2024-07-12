@@ -35,7 +35,24 @@ button{
   height: 30px;
   margin-left:45px;
   margin-top: 45px;
-  background-color: rgb(44, 35, 38);
+  background-color: rgb(104, 79, 87);
 }
 
+p{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: pink;
+  margin: 0;
+  height: 5vh; 
+  justify-content: center;
+  text-align: center;
+}
+
+h2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(155, 51, 69);
+}
 
