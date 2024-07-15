@@ -5,7 +5,7 @@
 }
 
 body{
-  background-color: rgb(236, 197, 210);
+  background-color: rgb(243, 236, 239);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -21,7 +21,7 @@ body{
 input{
   width:400px;
   height: 50px;
-  background-color: rgb(93, 59, 70);
+  background-color: rgb(230, 181, 195);
   border: none;
   padding-left: 15px;
   margin-top: 5px;
@@ -35,24 +35,31 @@ button{
   height: 30px;
   margin-left:45px;
   margin-top: 45px;
-  background-color: rgb(104, 79, 87);
+  background-color: rgb(245, 210, 221);
 }
 
 p{
   display:flex;
   flex-direction: column;
   align-items: center;
-  background-color: pink;
-  margin: 0;
+  background-color: rgb(240, 191, 199);
   height: 5vh; 
   justify-content: center;
   text-align: center;
+  margin: 0;
+  padding: 0;
+  
 }
 
 h2{
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(155, 51, 69);
+  background-color: rgb(219, 192, 196);
+}
+
+h1{
+  background-color: rgb(238, 200, 212);
+  font-weight: 200;
 }
 
