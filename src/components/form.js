@@ -25,7 +25,7 @@ function Form() {
     if (!newEmployee.phone || !/^\d+$/.test(newEmployee.phone)) return 'Phone number should contain only digits.';
     if (!newEmployee.gender) return 'Gender is required.';
     if (!newEmployee.position) return 'Position is required.';
-    if (!newEmployee.id || !/^\d+$/.test(newEmployee.id)) return 'ID should contain only digits.';
+    if (!newEmployee.id || !/^\d{13}$/.test(newEmployee.id)) return 'ID should be exactly 13 digits.';
     return '';
   };
 
@@ -106,13 +106,13 @@ function Form() {
       <h1>Employee Management</h1>
 
       <div>
-        <button onClick={handleShowForm}>Show Employee Form</button>
-        <button onClick={handleShowList}>Show Employee List</button>
+        <button className="navButton" onClick={handleShowForm}>Show Employee Form</button>
+        <button className="navButton" onClick={handleShowList}>Show Employee List</button>
       </div>
 
       {showForm && (
         <div>
-          <h2>{isEditing ? 'Edit Employee' : 'Add Employee'}</h2>
+          {/* <h2>{isEditing ? 'Edit Employee' : 'Add Employee'}</h2> */}
           <input
             type="text"
             placeholder="Name"
@@ -137,12 +137,14 @@ function Form() {
             value={newEmployee.nationality}
             onChange={(e) => setNewEmployee({ ...newEmployee, nationality: e.target.value })}
           />
-          <input
-            type="text"
-            placeholder="Gender"
+          <select
             value={newEmployee.gender}
             onChange={(e) => setNewEmployee({ ...newEmployee, gender: e.target.value })}
-          />
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
           <input
             type="text"
             placeholder="Position"
@@ -155,9 +157,9 @@ function Form() {
             value={newEmployee.id}
             onChange={(e) => setNewEmployee({ ...newEmployee, id: e.target.value })}
           />
-          <button onClick={handleSubmit}>{isEditing ? 'Update Employee' : 'Add Employee'}</button>
-          {isEditing && <button onClick={resetForm}>Cancel</button>}
           {error && <p style={{ color: 'red' }}>{error}</p>}
+          <button className="formButton" onClick={handleSubmit}>{isEditing ? 'Update Employee' : 'Add Employee'}</button>
+          {isEditing && <button className="formButton" onClick={resetForm}>Cancel</button>}
         </div>
       )}
 
@@ -171,20 +173,24 @@ function Form() {
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button onClick={handleSearch}>Search</button>
-          {employees
-            .filter(employee => employee.id.includes(searchQuery))
-            .map(employee => (
-              <div className='info' key={employee.id}>
-                <p>Name: {employee.name}</p>
-                <p>Email: {employee.email}</p>
-                <p>Gender: {employee.gender}</p>
-                <p>Phone: {employee.phone}</p>
-                <p>Position: {employee.position}</p>
-                <p>ID: {employee.id}</p>
-                <button onClick={() => deleteEmployee(employee.id)}>Delete</button>
-                <button onClick={() => editEmployee(employee)}>Edit</button>
-              </div>
-            ))}
+          {employees.length === 0 ? (
+            <p>No employees have been added.</p>
+          ) : (
+            employees
+              .filter(employee => employee.id.includes(searchQuery))
+              .map(employee => (
+                <div className='info' key={employee.id}>
+                  <p>Name: {employee.name}</p>
+                  <p>Email: {employee.email}</p>
+                  <p>Gender: {employee.gender}</p>
+                  <p>Phone: {employee.phone}</p>
+                  <p>Position: {employee.position}</p>
+                  <p>ID: {employee.id}</p>
+                  <button className="listButton" onClick={() => deleteEmployee(employee.id)}>Delete</button>
+                  <button className="listButton" onClick={() => editEmployee(employee)}>Edit</button>
+                </div>
+              ))
+          )}
         </div>
       )}
     </div>
@@ -192,9 +198,5 @@ function Form() {
 }
 
 export default Form;
-
-
-
-
 
 
