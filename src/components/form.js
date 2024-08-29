@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './form.css'; 
 
 function Form() {
   const [filteredEmployees, setFilteredEmployees] = useState([]);
@@ -102,17 +103,17 @@ function Form() {
   };
 
   return (
-    <div className="App">
+    <div className="app-container">
       <h1>Employee Management</h1>
 
-      <div>
-        <button className="navButton" onClick={handleShowForm}>Show Employee Form</button>
-        <button className="navButton" onClick={handleShowList}>Show Employee List</button>
+      <div className="nav-buttons">
+        <button className={`nav-button ${showForm ? 'active' : ''}`} onClick={handleShowForm}>Show Employee Form</button>
+        <button className={`nav-button ${showList ? 'active' : ''}`} onClick={handleShowList}>Show Employee List</button>
       </div>
 
       {showForm && (
-        <div>
-          {/* <h2>{isEditing ? 'Edit Employee' : 'Add Employee'}</h2> */}
+        <div className="form-container">
+          <h2>{isEditing ? 'Edit Employee' : 'Add Employee'}</h2>
           <input
             type="text"
             placeholder="Name"
@@ -157,14 +158,14 @@ function Form() {
             value={newEmployee.id}
             onChange={(e) => setNewEmployee({ ...newEmployee, id: e.target.value })}
           />
-          {error && <p style={{ color: 'red' }}>{error}</p>}
-          <button className="formButton" onClick={handleSubmit}>{isEditing ? 'Update Employee' : 'Add Employee'}</button>
-          {isEditing && <button className="formButton" onClick={resetForm}>Cancel</button>}
+          {error && <p className="error">{error}</p>}
+          <button className="form-button" onClick={handleSubmit}>{isEditing ? 'Update Employee' : 'Add Employee'}</button>
+          {isEditing && <button className="form-button" onClick={resetForm}>Cancel</button>}
         </div>
       )}
 
       {showList && (
-        <div>
+        <div className="list-container">
           <h2>Employee List</h2>
           <input
             type="text"
@@ -179,15 +180,15 @@ function Form() {
             employees
               .filter(employee => employee.id.includes(searchQuery))
               .map(employee => (
-                <div className='info' key={employee.id}>
+                <div className='employee-info' key={employee.id}>
                   <p>Name: {employee.name}</p>
                   <p>Email: {employee.email}</p>
                   <p>Gender: {employee.gender}</p>
                   <p>Phone: {employee.phone}</p>
                   <p>Position: {employee.position}</p>
                   <p>ID: {employee.id}</p>
-                  <button className="listButton" onClick={() => deleteEmployee(employee.id)}>Delete</button>
-                  <button className="listButton" onClick={() => editEmployee(employee)}>Edit</button>
+                  <button className="list-button" onClick={() => deleteEmployee(employee.id)}>Delete</button>
+                  <button className="list-button" onClick={() => editEmployee(employee)}>Edit</button>
                 </div>
               ))
           )}
@@ -198,5 +199,3 @@ function Form() {
 }
 
 export default Form;
-
-

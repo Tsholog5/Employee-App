@@ -4,7 +4,7 @@
 }
 
 body {
-  background-color: rgb(220, 194, 205);
+  background-color: rgb(212, 194, 202);
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -18,53 +18,51 @@ body {
   padding-right: 50px;
 }
 
-input {
-  width: 400px;
-  height: 50px;
-  background-color: rgb(210, 181, 187);
+.navButton {
+  width: 200px;
+  height: 40px;
+  margin: 0 10px;
+  background-color: rgb(238, 231, 233);
   border: none;
-  padding-left: 15px;
-  margin-top: 5px;
-  display: flex;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-select {
+.navButton.active {
+  background-color: rgb(200, 200, 200);
+}
+
+input, select {
   width: 400px;
   height: 50px;
   background-color: rgb(210, 181, 187);
   border: none;
   padding-left: 15px;
   margin-top: 5px;
-  display: flex;
 }
 
 button {
   width: 300px;
-  height: 30px;
-  margin-left: 45px;
-  margin-top: 45px;
+  height: 40px;
+  margin: 10px 0;
   background-color: rgb(238, 231, 233);
   border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-p {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: rgb(242, 236, 237);
-  height: 5vh;
-  justify-content: center;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+button:hover {
+  background-color: rgb(220, 220, 220);
 }
 
-h2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.error {
+  color: red;
+}
+
+.formContainer, .listContainer {
   background-color: rgb(246, 241, 242);
-  margin-top: 12px;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 h1 {
@@ -74,4 +72,19 @@ h1 {
   text-align: center;
   margin: 15px;
   padding: 15px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+.info {
+  margin-bottom: 10px;
+  background-color: rgb(246, 241, 242);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.listButton {
+  margin: 5px;
 }
