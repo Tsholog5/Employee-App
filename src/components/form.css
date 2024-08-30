@@ -38,7 +38,7 @@
   }
   
   .nav-button.active {
-    background-color: #d1d1d1;
+    background-color: #6756a9;
   }
   
   .form-container, .list-container {
@@ -75,7 +75,7 @@
   }
   
   .form-button:hover {
-    background-color: #0056b3;
+    background-color: #06294f;
   }
   
   .error {
@@ -94,13 +94,13 @@
     width: 100px;
     padding: 5px;
     margin: 5px 0;
-    background-color: #e8e8e8;
+    background-color: #504a4a;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
   .list-button:hover {
-    background-color: #d1d1d1;
+    background-color: #312a2a;
   }
   
