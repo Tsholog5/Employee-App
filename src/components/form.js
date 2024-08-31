@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './form.css'; 
+import './form.css';
 
 function Form() {
   const [filteredEmployees, setFilteredEmployees] = useState([]);
@@ -102,6 +102,15 @@ function Form() {
     setShowList(true);
   };
 
+  const getGenderIcon = (gender) => {
+    if (gender === 'male') {
+      return 'https://icon-library.com/images/male-icon/male-icon-24.jpg';
+    } else if (gender === 'female') {
+      return 'https://icon-library.com/images/female-icon/female-icon-24.jpg';
+    }
+    return null; 
+  };
+
   return (
     <div className="app-container">
       <h1>Employee Management</h1>
@@ -132,12 +141,6 @@ function Form() {
             value={newEmployee.phone}
             onChange={(e) => setNewEmployee({ ...newEmployee, phone: e.target.value })}
           />
-          <input
-            type="text"
-            placeholder="Nationality"
-            value={newEmployee.nationality}
-            onChange={(e) => setNewEmployee({ ...newEmployee, nationality: e.target.value })}
-          />
           <select
             value={newEmployee.gender}
             onChange={(e) => setNewEmployee({ ...newEmployee, gender: e.target.value })}
@@ -146,6 +149,9 @@ function Form() {
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
+          {newEmployee.gender && (
+            <img src={getGenderIcon(newEmployee.gender)} alt={`${newEmployee.gender} Icon`} className="gender-icon" />
+          )}
           <input
             type="text"
             placeholder="Position"
@@ -181,6 +187,9 @@ function Form() {
               .filter(employee => employee.id.includes(searchQuery))
               .map(employee => (
                 <div className='employee-info' key={employee.id}>
+                  {employee.gender && (
+                    <img src={getGenderIcon(employee.gender)} alt={`${employee.gender} Icon`} className="gender-icon" />
+                  )}
                   <p>Name: {employee.name}</p>
                   <p>Email: {employee.email}</p>
                   <p>Gender: {employee.gender}</p>
