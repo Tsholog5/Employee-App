@@ -68,6 +68,8 @@ function Form() {
     setNewEmployee(employee);
     setIsEditing(true);
     setCurrentEmployeeId(employee.id);
+    setShowForm(true);
+    setShowList(false);
   };
 
   const updateEmployee = () => {
@@ -104,9 +106,9 @@ function Form() {
 
   const getGenderIcon = (gender) => {
     if (gender === 'male') {
-      return 'https://icon-library.com/images/male-icon/male-icon-24.jpg';
+      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpC650bxBEk2zBAQj64HdZ770dTVGbO_lm9A&s';
     } else if (gender === 'female') {
-      return 'https://icon-library.com/images/female-icon/female-icon-24.jpg';
+      return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzVvc_1EbinQldCVFBX3uJ5vKe8LQP6CvhXA&s';
     }
     return null; 
   };
@@ -164,6 +166,10 @@ function Form() {
             value={newEmployee.id}
             onChange={(e) => setNewEmployee({ ...newEmployee, id: e.target.value })}
           />
+          <input
+            type="file"
+            onChange={(e) => setNewEmployee({ ...newEmployee, image: URL.createObjectURL(e.target.files[0]) })}
+          />
           {error && <p className="error">{error}</p>}
           <button className="form-button" onClick={handleSubmit}>{isEditing ? 'Update Employee' : 'Add Employee'}</button>
           {isEditing && <button className="form-button" onClick={resetForm}>Cancel</button>}
@@ -183,23 +189,43 @@ function Form() {
           {employees.length === 0 ? (
             <p>No employees have been added.</p>
           ) : (
-            employees
-              .filter(employee => employee.id.includes(searchQuery))
-              .map(employee => (
-                <div className='employee-info' key={employee.id}>
-                  {employee.gender && (
-                    <img src={getGenderIcon(employee.gender)} alt={`${employee.gender} Icon`} className="gender-icon" />
-                  )}
-                  <p>Name: {employee.name}</p>
-                  <p>Email: {employee.email}</p>
-                  <p>Gender: {employee.gender}</p>
-                  <p>Phone: {employee.phone}</p>
-                  <p>Position: {employee.position}</p>
-                  <p>ID: {employee.id}</p>
-                  <button className="list-button" onClick={() => deleteEmployee(employee.id)}>Delete</button>
-                  <button className="list-button" onClick={() => editEmployee(employee)}>Edit</button>
-                </div>
-              ))
+            <table className="employee-table">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>Phone</th>
+                  <th>Position</th>
+                  <th>ID</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {employees
+                  .filter(employee => employee.id.includes(searchQuery))
+                  .map(employee => (
+                    <tr key={employee.id}>
+                      <td>
+                        {employee.image && (
+                          <img src={employee.image} alt="Employee" className="employee-image" />
+                        )}
+                      </td>
+                      <td>{employee.name}</td>
+                      <td>{employee.email}</td>
+                      <td>{employee.gender}</td>
+                      <td>{employee.phone}</td>
+                      <td>{employee.position}</td>
+                      <td>{employee.id}</td>
+                      <td>
+                        <button className="list-button" onClick={() => editEmployee(employee)}>Edit</button>
+                        <button className="list-button" onClick={() => deleteEmployee(employee.id)}>Delete</button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
           )}
         </div>
       )}
